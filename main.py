@@ -18,15 +18,24 @@ ideas_by_category = {
     ]
 }
 
+def save_to_favorites(idea):
+    with open("favorites.txt", "a", encoding="utf-8") as f:
+        f.write(idea + "\n")
+    print("✓ Идея сохранена в favorites.txt")
+
 def main():
-    print("Доступные категории: работа, хобби, технологии")
+    print("📋 Доступные категории: работа, хобби, технологии")
     category = input("Выберите категорию: ").lower().strip()
     
     if category in ideas_by_category:
         idea = random.choice(ideas_by_category[category])
-        print(f"Ваша идея: {idea}")
+        print(f"💡 Ваша идея: {idea}")
+        
+        save = input("Сохранить идею? (да/нет): ").lower().strip()
+        if save == "да":
+            save_to_favorites(idea)
     else:
-        print("Категория не найдена.")
+        print("❌ Категория не найдена.")
 
 if __name__ == "__main__":
     main()
