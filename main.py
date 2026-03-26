@@ -1,4 +1,5 @@
 import random
+import csv
 
 ideas_by_category = {
     "работа": [
@@ -37,5 +38,13 @@ def main():
     else:
         print("❌ Категория не найдена.")
 
-if __name__ == "__main__":
+	if __name__ == "__main__":
     main()
+	def export_ideas_to_csv(ideas_dict, filename="ideas.csv"):
+    with open(filename, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Категория", "Идея"])
+        for category, ideas in ideas_dict.items():
+            for idea in ideas:
+                writer.writerow([category, idea])
+    print(f"✓ Идеи экспортированы в {filename}")
